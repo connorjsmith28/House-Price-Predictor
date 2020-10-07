@@ -6,14 +6,14 @@ from selenium.webdriver.chrome.options import Options
 from fake_useragent import UserAgent
 
 #Create random user to fool recaptcha
-Options = options()
+Options = Options()
 ua = UserAgent()
 userAgent = ua.random
 print(userAgent)
 Options.add_argument(f'user-agent={userAgent}')
 
 #Pull URLs and create webdrivers for each and set the option to use random useragent
-Driver = webdriver.Chrome(options=Options, executable_path=r"C:\Users\Connor Smith\.wdm\drivers\chromedriver\win32\84.0.4147.30\chromedriver.exe")
+Driver = webdriver.Chrome(chrome_options=Options, executable_path=r"C:\Users\Connor Smith\.wdm\drivers\chromedriver\win32\84.0.4147.30\chromedriver.exe")
 Driver.get("https://www.zillow.com/")
 
 #Assume for now you will not know which city you are interested in. 
