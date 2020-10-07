@@ -1,1 +1,27 @@
-This is where the Scrapper goes
+#Pull URLs and create webdrivers for each
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+from fake_useragent import UserAgent
+
+#Create random user to fool recaptcha
+Options = options()
+ua = UserAgent()
+userAgent = ua.random
+print(userAgent)
+Options.add_argument(f'user-agent={userAgent}')
+
+#Pull URLs and create webdrivers for each and set the option to use random useragent
+Driver = webdriver.Chrome(options=Options, executable_path=r"C:\Users\Connor Smith\.wdm\drivers\chromedriver\win32\84.0.4147.30\chromedriver.exe")
+Driver.get("https://www.zillow.com/")
+
+#Assume for now you will not know which city you are interested in. 
+#Pop up asking for which city to search in Zillow
+City = input("Which city are you interested in? ")
+
+
+#add wait to load
+Driver.find_element_by_xpath('//*[@id="search-box-input"]').send_keys(City)
+Driver.find_element_by_xpath('//*[@id="search-box-input"]').submit()
+Driver.find_element_by_xpath('/html/body/div[8]/div/div[1]/div/div/div/ul/li[1]/button').click()
